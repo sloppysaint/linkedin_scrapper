@@ -2,12 +2,6 @@
 
 A hosted REST API that accepts a LinkedIn profile URL and returns structured JSON with all publicly available profile data — built by **reverse engineering LinkedIn's internal Voyager API**.
 
-## Live Demo
-
-```
-POST https://<your-render-url>.onrender.com/api/profile
-```
-Interactive docs: `https://<your-render-url>.onrender.com/docs`
 
 ---
 
@@ -91,7 +85,7 @@ Concurrent calls reduce total latency to ~the slowest single call (~1–2 s) ins
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<you>/linkedin-profile-api
+git clone [https://github.com/<you>/linkedin-profile-api](https://github.com/sloppysaint/linkedin_scrapper)
 cd linkedin-profile-api
 
 # 2. Create a virtual environment
@@ -133,25 +127,6 @@ docker-compose up --build
    ```
 
 > **Security**: These values never leave your environment. They are not committed to the repository (`.env` is in `.gitignore`).
-
----
-
-## Deployment on Render.com
-
-1. Push the repository to GitHub
-2. Go to [render.com](https://render.com) → New → Web Service
-3. Connect your GitHub repository
-4. Set the following in **Environment** → **Secret Files / Env Vars**:
-
-   | Key | Value |
-   |---|---|
-   | `LI_AT` | Your `li_at` cookie value |
-   | `JSESSIONID` | Your `JSESSIONID` cookie value (with quotes) |
-   | `API_KEY` | *(optional)* A bearer token to protect your API |
-
-5. Build command: `pip install -r requirements.txt`
-6. Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-7. Render will provide a public HTTPS URL automatically.
 
 ---
 
@@ -308,9 +283,3 @@ linkedin_scrapper/
 
 ---
 
-## Security Notes
-
-- Credentials are stored **only** in environment variables — never in code or the repository
-- `.env` is listed in `.gitignore` and will never be committed
-- Render stores secrets encrypted and injects them at runtime
-- The `API_KEY` option lets you restrict access to the hosted endpoint
