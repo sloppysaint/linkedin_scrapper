@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: linkedin-profile-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: LI_AT
+        sync: false         # Set manually in Render dashboard — never auto-synced from repo
+      - key: JSESSIONID
+        sync: false         # Set manually in Render dashboard
+      - key: API_KEY
+        sync: false         # Optional — leave blank for open access
+      - key: PYTHONUNBUFFERED
+        value: "1"
